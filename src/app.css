@@ -1,1 +1,6 @@
 @import 'tailwindcss';
+@import '@fontsource/space-mono';
+
+body {
+	font-family: 'Space Mono', monospace;
+}
