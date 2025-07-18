@@ -29,7 +29,7 @@
 	{:else}
 		<button
 			onclick={login}
-			class="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors flex items-center space-x-2"
+			class="px-6 py-3 bg-black hover:bg-blue-700 text-white font-medium rounded-lg transition-colors flex items-center space-x-2"
 		>
 			<svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
 				<path
