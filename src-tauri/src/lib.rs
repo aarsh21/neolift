@@ -35,7 +35,7 @@ async fn start_oauth(window: Window, state: String) -> Result<u16, String> {
 
     start_with_config(cfg, move |url| {
         if let Some(code) = verify(&url, &state) {
-            let _ = window.emit("github_code", code);
+            let _ = window.emit("google_code", code);
         }
     }).map_err(|e| e.to_string())
 }
@@ -45,14 +45,17 @@ async fn exchange_code(
     code: String,
     client_id: String,
     client_secret: String,
+    redirect_uri: String,
 ) -> Result<String, String> {
     let resp = Client::new()
-        .post("https://github.com/login/oauth/access_token")
+        .post("https://oauth2.googleapis.com/token")
         .header("Accept", "application/json")
         .form(&[
             ("client_id", client_id),
             ("client_secret", client_secret),
             ("code", code),
+            ("grant_type", "authorization_code".to_string()),
+            ("redirect_uri", redirect_uri), // Google requires this
         ])
         .send()
         .await

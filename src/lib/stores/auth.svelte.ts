@@ -1,11 +1,13 @@
-import { checkExistingToken, loginWithGitHub, logout as logoutAuth, getUserInfo } from '../auth.js';
+import { checkExistingToken, loginWithGoogle, logout as logoutAuth, getUserInfo } from '../auth.js';
 
 interface User {
-	id: number;
-	login: string;
+	id: string;
 	name: string;
-	avatar_url: string;
+	given_name: string;
+	family_name: string;
+	picture: string;
 	email: string;
+	verified_email: boolean;
 }
 
 interface AuthState {
@@ -63,7 +65,7 @@ function createAuthStore() {
 		state.error = null;
 
 		try {
-			await loginWithGitHub();
+			await loginWithGoogle();
 		} catch (error) {
 			state.error = error instanceof Error ? error.message : 'Failed to login';
 			state.isLoading = false;
